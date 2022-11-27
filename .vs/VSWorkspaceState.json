@@ -2,13 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\frontend",
+    "\\frontend\\public",
     "\\frontend\\src",
-    "\\frontend\\src\\components",
-    "\\frontend\\src\\services",
-    "\\Server",
-    "\\Server\\api",
-    "\\Server\\dao"
+    "\\frontend\\src\\components"
   ],
-  "SelectedNode": "\\Server\\.env",
+  "SelectedNode": "\\frontend\\src\\components\\add-review.js",
   "PreviewInSolutionExplorer": false
 }
