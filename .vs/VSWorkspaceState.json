@@ -1,8 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Server"
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\components",
+    "\\frontend\\src\\services",
+    "\\Server",
+    "\\Server\\api",
+    "\\Server\\dao"
   ],
-  "SelectedNode": "\\Server\\package.json",
+  "SelectedNode": "\\Server\\.env",
   "PreviewInSolutionExplorer": false
 }
