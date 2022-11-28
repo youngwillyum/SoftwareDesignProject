@@ -43,6 +43,7 @@ function App() {
             { user ? (<a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>Logout {user.name}</a>)
                : (<Link to={"/login"} className="nav-link">Login</Link>) }
           </li>
+        
 
         </div>
       </nav>
