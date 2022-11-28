@@ -3,50 +3,53 @@ import { Link } from "react-router-dom";
 import RestaurantDataService from "../services/restaurant"
 
 const RestaurantsList = props => {
-  //variables to hold items/fields users can search by
+  //variables to hold reservation
   const [restaurants, setRestaurants] = useState([]);
   const [searchName, setSearchName ] = useState("");
   const [searchZip, setSearchZip ] = useState("");
   const [searchCuisine, setSearchCuisine ] = useState("");
   const [cuisines, setCuisines] = useState(["All Cuisines"]);
 
+
+  const [resName, setResName ] = useState("");
+  const [resPhone, setResPhone ] = useState("");
+  const [resEmail, setResEmail ] = useState("");
+  const [resDateTime, setResDateTime ] = useState("");
+
   //tells react that app should do these after render
   useEffect(() => {
-    retrieveRestaurants();
-    retrieveCuisines();
+    //log in prompt???
+    //retrieveRestaurants();
+    //retrieveCuisines();
   }, []);
 
-  const onChangeSearchName = e => {
-    const searchName = e.target.value;
-    setSearchName(searchName);
+  const onChangeName = e => {
+    const resName = e.target.value;
+    setResName(resName);
   };
 
-  const onChangeSearchZip = e => {
-    const searchZip = e.target.value;
-    setSearchZip(searchZip);
+  const onChangePhone = e => {
+    const resPhone = e.target.value;
+    setResPhone(resPhone);
   };
 
-  const onChangeSearchCuisine = e => {
-    const searchCuisine = e.target.value;
-    setSearchCuisine(searchCuisine);
+  const onChangeEmail = e => {
+    const resEmail = e.target.value;
+    setResEmail(resEmail);
   };
+
+  const onChangeDateTime = e => {
+    const resDateTime = e.target.value;
+    setResDateTime(resDateTime);
+  };
+
+
 
   const retrieveRestaurants = () => {
     RestaurantDataService.getAll() 
       .then(response => {
         console.log(response.data);
         setRestaurants(response.data.restaurants);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const retrieveCuisines = () => {
-    RestaurantDataService.getCuisines()
-      .then(response => {
-        console.log(response.data);
-        setCuisines(["All Cuisines"].concat(response.data));
       })
       .catch(e => {
         console.log(e);
@@ -86,63 +89,60 @@ const RestaurantsList = props => {
 
   return (
     <div>
+      <h1>Make a Reservation</h1>
       <div className="row pb-1">
-        {/* 1st input box/search - name */}
+        {/* 1st input box- name */}
         <div className="input-group col-lg-4"> 
           <input
             type="text"
             className="form-control"
-            placeholder="Search by name"
-            value={searchName}
-            onChange={onChangeSearchName}
+            placeholder="Name"
+            value={resName}
+            onChange={onChangeName}
           />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={findByName}
-            >
-              Search
-            </button>
-          </div>
         </div>
-        {/* 2nd input box/search - zipcode */}
+        {/* 2nd input box - phone */}
         <div className="input-group col-lg-4">
           <input
             type="text"
             className="form-control"
-            placeholder="Search by zip"
-            value={searchZip}
-            onChange={onChangeSearchZip}
+            placeholder="Phone Number"
+            value={resPhone}
+            onChange={onChangePhone}
           />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={findByZip}
-            >
-              Search
-            </button>
-          </div>
+        </div>
+        {/* 3rd input box - email */}
+        <div className="input-group col-lg-4">
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            value={resEmail}
+            onChange={onChangeEmail}
+          />
         </div>
 
-        {/* 3rd input, drop down menu - cuisines */}
+        {/* 3rd input box - date & time */}
         <div className="input-group col-lg-4">
-          <select onChange={onChangeSearchCuisine}>
-             {cuisines.map(cuisine => {
-               return (<option value={cuisine}> {cuisine.substring(0, 21)} </option>)
-             })}
-          </select>
+          <label for="date_time">Date and Time of Reservation:</label>
+          <input
+            type="datetime-local"
+            className="form-control"
+            id="date_time"
+            value={resDateTime}
+            onChange={onChangeDateTime}
+          />
+        </div>
+
           <div className="input-group-append">
             <button
               className="btn btn-outline-secondary"
               type="button"
               onClick={findByCuisine}
             >
-              Search
+              Search for Tables
             </button>
           </div>
-        </div>
       </div>
 
       
