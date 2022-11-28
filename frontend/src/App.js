@@ -8,18 +8,21 @@ import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
 
 function App() {
-  const [user, setUser] = React.useState(null);
-
+  //create a user variable in the state using react hooks
+  const [user, setUser] = React.useState(null); //create a state variable to use in the react app
+  //now create log in and log out fxns
   async function login(user = null) {
     setUser(user);
   }
 
   async function logout() {
-    setUser(null)
+    setUser(null);
   }
+
 
   return (
     <div>
+      {/* nav bar section */}
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/restaurants" className="navbar-brand">
           Restaurant Reviews
@@ -30,8 +33,8 @@ function App() {
               Restaurants
             </Link>
           </li>
-          <li className="nav-item" >
-            { user ? (
+          <li classname="nav-item" >
+          { user ? (
               <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
                 Logout {user.name}
               </a>
@@ -40,13 +43,13 @@ function App() {
               Login
             </Link>
             )}
-
           </li>
         </div>
       </nav>
 
+      {/* route section/rest of page */}
       <div className="container mt-3">
-        <Switch>
+      <Switch>
           <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
           <Route 
             path="/restaurants/:id/review"
@@ -68,6 +71,7 @@ function App() {
           />
         </Switch>
       </div>
+
     </div>
   );
 }
