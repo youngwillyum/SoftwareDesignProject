@@ -23,6 +23,7 @@ const Restaurant = props => {
       });
   };
 
+  //called when component renders - only called when id updated (b/c of array)
   useEffect(() => {
     getRestaurant(props.match.params.id);
   }, [props.match.params.id]);

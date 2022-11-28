@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import RestaurantDataService from "../services/restaurant";
 import { Link } from "react-router-dom";
+import RestaurantDataService from "../services/restaurant"
 
 const RestaurantsList = props => {
+  //variables to hold items/fields users can search by
   const [restaurants, setRestaurants] = useState([]);
   const [searchName, setSearchName ] = useState("");
   const [searchZip, setSearchZip ] = useState("");
   const [searchCuisine, setSearchCuisine ] = useState("");
   const [cuisines, setCuisines] = useState(["All Cuisines"]);
 
+  //tells react that app should do these after render
   useEffect(() => {
     retrieveRestaurants();
     retrieveCuisines();
@@ -27,15 +29,13 @@ const RestaurantsList = props => {
   const onChangeSearchCuisine = e => {
     const searchCuisine = e.target.value;
     setSearchCuisine(searchCuisine);
-    
   };
 
   const retrieveRestaurants = () => {
-    RestaurantDataService.getAll()
+    RestaurantDataService.getAll() 
       .then(response => {
         console.log(response.data);
         setRestaurants(response.data.restaurants);
-        
       })
       .catch(e => {
         console.log(e);
@@ -47,7 +47,6 @@ const RestaurantsList = props => {
       .then(response => {
         console.log(response.data);
         setCuisines(["All Cuisines"].concat(response.data));
-        
       })
       .catch(e => {
         console.log(e);
@@ -88,7 +87,8 @@ const RestaurantsList = props => {
   return (
     <div>
       <div className="row pb-1">
-        <div className="input-group col-lg-4">
+        {/* 1st input box/search - name */}
+        <div className="input-group col-lg-4"> 
           <input
             type="text"
             className="form-control"
@@ -106,6 +106,7 @@ const RestaurantsList = props => {
             </button>
           </div>
         </div>
+        {/* 2nd input box/search - zipcode */}
         <div className="input-group col-lg-4">
           <input
             type="text"
@@ -124,13 +125,12 @@ const RestaurantsList = props => {
             </button>
           </div>
         </div>
-        <div className="input-group col-lg-4">
 
+        {/* 3rd input, drop down menu - cuisines */}
+        <div className="input-group col-lg-4">
           <select onChange={onChangeSearchCuisine}>
              {cuisines.map(cuisine => {
-               return (
-                 <option value={cuisine}> {cuisine.substr(0, 20)} </option>
-               )
+               return (<option value={cuisine}> {cuisine.substring(0, 21)} </option>)
              })}
           </select>
           <div className="input-group-append">
@@ -142,9 +142,10 @@ const RestaurantsList = props => {
               Search
             </button>
           </div>
-
         </div>
       </div>
+
+      
       <div className="row">
         {restaurants.map((restaurant) => {
           const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
@@ -173,6 +174,6 @@ const RestaurantsList = props => {
       </div>
     </div>
   );
-}
+};
 
 export default RestaurantsList;
