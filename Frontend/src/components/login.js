@@ -5,6 +5,11 @@ const Login = props => {
   const initialUserState = {
     name: "",
     id: "",
+    phone: "",
+    email: "",
+    date_time: "",
+    numberofGuests: ""
+
   };
 
   const [user, setUser] = useState(initialUserState);
@@ -45,6 +50,58 @@ const Login = props => {
             value={user.id}
             onChange={handleInputChange}
             name="id"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="phone">Phone</label>
+          <input
+            type="text"
+            className="form-control"
+            id="phone"
+            required
+            value={user.phone}
+            onChange={handleInputChange}
+            name="phone"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            className="form-control"
+            id="email"
+            required
+            value={user.email}
+            onChange={handleInputChange}
+            name="email"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="date_time">Date & Time</label>
+          <input
+            type="datetime-local"
+            className="form-control"
+            id="date_time"
+            required
+            value={user.date_time}
+            onChange={handleInputChange}
+            name="date_time"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="numberofGuests">Number of Guests</label>
+          <input
+            type="text"
+            className="form-control"
+            id="numberofGuests"
+            required
+            value={user.numberofGuests}
+            onChange={handleInputChange}
+            name="numberofGuests"
           />
         </div>
 

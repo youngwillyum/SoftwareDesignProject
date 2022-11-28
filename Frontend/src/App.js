@@ -26,7 +26,7 @@ function App() {
       <nav className="navbar navbar-expand navbar-dark bg-dark">
 
         {/* 1st link - brand/home */}
-        <a href="/restaurants" className="navbar-brand">Restaurant Reviews</a>
+        <a href="/restaurants" className="navbar-brand">Table_Reserver</a>
 
         {/* remaining links */}
         <div className="navbar-nav mr-auto">
