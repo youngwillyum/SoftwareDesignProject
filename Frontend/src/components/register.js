@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Form from 'react-bootstrap/Form';
 
 const Register = props => {
     
@@ -7,8 +8,13 @@ const Register = props => {
         id: "",
         phone: "",
         email: "",
-        date_time: "",
-        numberofGuests: ""
+        mailingaddress: "",
+        billingaddress: "",
+        billingtoggle: "",
+        PreferredNumber: "",
+        Points: "",
+        PreferredPayment: "",
+
     
       };
     
@@ -80,6 +86,47 @@ const Register = props => {
                 name="email"
               />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="mailingaddress">Mailing Address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="mailingaddress"
+                required
+                value={user.mailingaddress}
+                onChange={handleInputChange}
+                name="mailingaddress"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="bilingaddress">Billing Address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="billingaddress"
+                required
+                value={user.billingaddress}
+                onChange={handleInputChange}
+                name="billingaddress"
+              />
+            </div>
+
+
+
+            <Form>
+                {['radio'].map((type) => (
+                    <div key={`default-${type}`} className="form-group">
+                        <Form.Check 
+                        type={type}
+                        id={`default-${type}`}
+                        label={`same as Mailing Address`}
+                        />
+                    </div>
+                ))}
+            </Form>
+
     
            
     
