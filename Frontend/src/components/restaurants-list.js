@@ -11,6 +11,8 @@ const RestaurantsList = props => {
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
 
+  const [resTables, setResTables] = useState([]);
+
   //tells react that app should do these after render
   useEffect(() => {
     //log in prompt???
@@ -55,6 +57,21 @@ const RestaurantsList = props => {
         console.log(e);
       });
   };
+
+  const addToRes = e => {
+    const tableNumToAdd = e.target.value;
+    for (let i = 0; i < tables.length; i++) {
+      if (tables[i].table_number == tableNumToAdd){
+        setResTables(resTables.concat(tables[i]));
+      }
+    }
+  };
+
+  const removeFromAvalible = (toRemove) => {
+    
+  }
+
+
 
   const refreshList = () => {
     retrieveTables();
@@ -152,17 +169,54 @@ const RestaurantsList = props => {
                     <strong>Number of Seats: </strong>{table.table_capacity}<br/>
                   </p>
                   <div className="row">
-                  <Link to={"/tables"} className="btn btn-primary col-lg-5 mx-1 mb-1">
+                  {/* <Link to={"/tables"} className="btn btn-primary col-lg-5 mx-1 mb-1">
                     Add to Reservation
-                  </Link>
+                  </Link> */}
+                    <button
+                      className="btn btn-primary col-lg-5 mx-1 mb-1" 
+                      type="button" 
+                      value={table.table_number}
+                      onClick={addToRes}
+                    >
+                      Add to Reservation
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           );
         })}
+      </div>
 
-
+      <div className="current-reservation">
+        <h1>Current Reservation</h1>
+      </div>
+      <div className="row">
+        {resTables.map((table) => {
+          return (
+            <div className="col-lg-4 pb-1">
+              
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Table {table.table_number}</h5>
+                  <p className="card-text">
+                    <strong>Number of Seats: </strong>{table.table_capacity}<br/>
+                  </p>
+                  <div className="row">
+                    <button
+                      className="btn btn-primary col-lg-5 mx-1 mb-1" 
+                      type="button" 
+                      value={table}
+                      onClick={addToRes}
+                    >
+                      Remove From Reservation
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
