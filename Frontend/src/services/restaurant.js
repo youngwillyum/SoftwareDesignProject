@@ -7,7 +7,7 @@ class RestaurantDataService {
     }
 
     getWithNumGuests(num = 0){
-        return http.get(`?table_capacity=${num}`);
+        return http.get(`?numGuests=${num}`);
     }
     
     get(id) {

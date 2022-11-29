@@ -46,7 +46,8 @@ const RestaurantsList = props => {
   };
 
   const retrieveTables = () => {
-    RestaurantDataService.getAll() 
+    if (resNumGuests != ""){
+      RestaurantDataService.getWithNumGuests(resNumGuests) 
       .then(response => {
         console.log(response.data);
         setTables(response.data.tables);
@@ -55,6 +56,17 @@ const RestaurantsList = props => {
       .catch(e => {
         console.log(e);
       });
+    }else{
+      RestaurantDataService.getAll() 
+        .then(response => {
+          console.log(response.data);
+          setTables(response.data.tables);
+          setResTables([]);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   };
 
   // const retrieveTables = () => {
