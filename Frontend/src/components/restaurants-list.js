@@ -4,13 +4,7 @@ import RestaurantDataService from "../services/restaurant"
 
 const RestaurantsList = props => {
   //variables to hold reservation
-  const [restaurants, setRestaurants] = useState([]);
-  const [searchName, setSearchName ] = useState("");
-  const [searchZip, setSearchZip ] = useState("");
-  const [searchCuisine, setSearchCuisine ] = useState("");
-  const [cuisines, setCuisines] = useState(["All Cuisines"]);
-
-
+  const [tables, setTables] = useState([]);
   const [resName, setResName ] = useState("");
   const [resPhone, setResPhone ] = useState("");
   const [resEmail, setResEmail ] = useState("");
@@ -49,11 +43,13 @@ const RestaurantsList = props => {
     setResNumGuests(resNumGuests);
   };
 
-  const retrieveRestaurants = () => {
+
+
+  const retrieveTables = () => {
     RestaurantDataService.getAll() 
       .then(response => {
         console.log(response.data);
-        setRestaurants(response.data.restaurants);
+        setTables(response.data.tables);
       })
       .catch(e => {
         console.log(e);
@@ -61,34 +57,18 @@ const RestaurantsList = props => {
   };
 
   const refreshList = () => {
-    retrieveRestaurants();
+    retrieveTables();
   };
 
   const find = (query, by) => {
     RestaurantDataService.find(query, by)
       .then(response => {
         console.log(response.data);
-        setRestaurants(response.data.restaurants);
+        setTables(response.data.tables);
       })
       .catch(e => {
         console.log(e);
       });
-  };
-
-  const findByName = () => {
-    find(searchName, "name")
-  };
-
-  const findByZip = () => {
-    find(searchZip, "zipcode")
-  };
-
-  const findByCuisine = () => {
-    if (searchCuisine == "All Cuisines") {
-      refreshList();
-    } else {
-      find(searchCuisine, "cuisine")
-    }
   };
 
   return (
@@ -153,29 +133,27 @@ const RestaurantsList = props => {
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={findByCuisine}
+              onClick={retrieveTables}
             >
               Search for Tables
             </button>
           </div>
       </div>
-
       
       <div className="row">
-        {restaurants.map((restaurant) => {
-          const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
+        {tables.map((table) => {
           return (
             <div className="col-lg-4 pb-1">
+              
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">{restaurant.name}</h5>
+                  <h5 className="card-title">Table {table.table_number}</h5>
                   <p className="card-text">
-                    <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
-                    <strong>Address: </strong>{address}
+                    <strong>Number of Seats: </strong>{table.table_capacity}<br/>
                   </p>
                   <div className="row">
-                  <Link to={"/restaurants/"+restaurant._id} className="btn btn-primary col-lg-5 mx-1 mb-1">
-                    View Reviews
+                  <Link to={"/tables"} className="btn btn-primary col-lg-5 mx-1 mb-1">
+                    Add to Reservation
                   </Link>
                   </div>
                 </div>
