@@ -20,15 +20,21 @@ export default class TablesDAO {
     tablesPerPage = 20,
   } = {}) {
     let query
+    // if (filters) {
+    //   if ("name" in filters) {
+    //     query = { $text: { $search: filters["name"] } }
+    //   } else if ("cuisine" in filters) {
+    //     query = { "cuisine": { $eq: filters["cuisine"] } }
+    //   } else if ("zipcode" in filters) {
+    //     query = { "address.zipcode": { $eq: filters["zipcode"] } }
+    //   }
+    // }
+
     if (filters) {
-      if ("name" in filters) {
-        query = { $text: { $search: filters["name"] } }
-      } else if ("cuisine" in filters) {
-        query = { "cuisine": { $eq: filters["cuisine"] } }
-      } else if ("zipcode" in filters) {
-        query = { "address.zipcode": { $eq: filters["zipcode"] } }
+        if ("numGuests" in filters) {
+          query = { "table_capacity": { $lte: filters["numGuests"] } }
+        } 
       }
-    }
 
     let cursor
     

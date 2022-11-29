@@ -45,8 +45,6 @@ const RestaurantsList = props => {
     setResNumGuests(resNumGuests);
   };
 
-
-
   const retrieveTables = () => {
     RestaurantDataService.getAll() 
       .then(response => {
@@ -58,6 +56,18 @@ const RestaurantsList = props => {
         console.log(e);
       });
   };
+
+  // const retrieveTables = () => {
+  //   getWithNumGuests.getAll() 
+  //     .then(response => {
+  //       console.log(response.data);
+  //       setTables(response.data.tables);
+  //       setResTables([]);
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // };
 
   const addToRes = e => {
     const tableNumToAdd = e.target.value;
@@ -209,6 +219,7 @@ const RestaurantsList = props => {
             placeholder="Phone Number"
             value={resPhone}
             onChange={onChangePhone}
+
           />
         </div>
         {/* 3rd input box - email */}
