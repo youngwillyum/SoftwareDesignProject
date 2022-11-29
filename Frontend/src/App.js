@@ -6,12 +6,17 @@ import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants";
 import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
+import Register from "./components/register";
 
 function App() {
   const [user, setUser] = React.useState(null); //create state variable (user), initialize to null, and setUser
 
   //login function - pass user, sets use to equal parameter
-  async function login(user = null) {
+  async function login(user) {
+    setUser(user);
+  }
+
+  async function register(user = null){
     setUser(user);
   }
 
@@ -43,6 +48,12 @@ function App() {
             { user ? (<a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>Logout {user.name}</a>)
                : (<Link to={"/login"} className="nav-link">Login</Link>) }
           </li>
+
+          <li className="nav-item">
+            {/* if user exists, run logout fxn onClick, if user does not exist, go to /login page when link clicked */}
+            { user ? (<a></a>)
+               : (<Link to={"/register"} className="nav-link">Register</Link>) }
+          </li>
         
 
         </div>
@@ -61,6 +72,9 @@ function App() {
           />
           <Route path="/login"
             render={(props) => ( <Login {...props} login={login} />)}
+          />
+          <Route path="/register"
+            render={(props) => ( <Register {...props} register={register}/>)}
           />
         </Switch>
       </div>
