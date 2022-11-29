@@ -15,6 +15,7 @@ const RestaurantsList = props => {
   const [resPhone, setResPhone ] = useState("");
   const [resEmail, setResEmail ] = useState("");
   const [resDateTime, setResDateTime ] = useState("");
+  const [resNumGuests, setResNumGuests ] = useState("");
 
   //tells react that app should do these after render
   useEffect(() => {
@@ -43,7 +44,10 @@ const RestaurantsList = props => {
     setResDateTime(resDateTime);
   };
 
-
+  const onChangeNumGuests = e => {
+    const resNumGuests = e.target.value;
+    setResNumGuests(resNumGuests);
+  };
 
   const retrieveRestaurants = () => {
     RestaurantDataService.getAll() 
@@ -122,7 +126,18 @@ const RestaurantsList = props => {
           />
         </div>
 
-        {/* 3rd input box - date & time */}
+        {/* 4th input box - number of customers */}
+        <div className="input-group col-lg-4">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Number of Guests"
+            value={resNumGuests}
+            onChange={onChangeNumGuests}
+          />
+        </div>
+
+        {/* 5th input box - date & time */}
         <div className="input-group col-lg-4">
           <label for="date_time">Date and Time of Reservation:</label>
           <input
