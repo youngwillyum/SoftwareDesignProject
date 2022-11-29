@@ -222,12 +222,19 @@ const RestaurantsList = props => {
           />
         </div>
           <div className="input-group-append">
+          <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={retrieveTables}
+            >
+              Login
+            </button>
             <button
               className="btn btn-outline-secondary"
               type="button"
               onClick={retrieveTables}
             >
-              Make Reservation
+              Make Reservation as Guest
             </button>
           </div>
       </div>
