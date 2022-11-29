@@ -63,15 +63,20 @@ const RestaurantsList = props => {
     for (let i = 0; i < tables.length; i++) {
       if (tables[i].table_number == tableNumToAdd){
         setResTables(resTables.concat(tables[i]));
+        tables.splice(i,1)
       }
     }
   };
 
-  const removeFromAvalible = (toRemove) => {
-    
-  }
-
-
+  const removeFromRes = e => {
+    const tableNumToRemove = e.target.value;
+    for (let i = 0; i < resTables.length; i++) {
+      if (resTables[i].table_number == tableNumToRemove){
+        setTables(tables.concat(resTables[i]));
+        resTables.splice(i,1)
+      }
+    }
+  };
 
   const refreshList = () => {
     retrieveTables();
@@ -169,9 +174,6 @@ const RestaurantsList = props => {
                     <strong>Number of Seats: </strong>{table.table_capacity}<br/>
                   </p>
                   <div className="row">
-                  {/* <Link to={"/tables"} className="btn btn-primary col-lg-5 mx-1 mb-1">
-                    Add to Reservation
-                  </Link> */}
                     <button
                       className="btn btn-primary col-lg-5 mx-1 mb-1" 
                       type="button" 
@@ -206,8 +208,8 @@ const RestaurantsList = props => {
                     <button
                       className="btn btn-primary col-lg-5 mx-1 mb-1" 
                       type="button" 
-                      value={table}
-                      onClick={addToRes}
+                      value={table.table_number}
+                      onClick={removeFromRes}
                     >
                       Remove From Reservation
                     </button>
