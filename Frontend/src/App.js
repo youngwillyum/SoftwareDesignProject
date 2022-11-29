@@ -31,7 +31,7 @@ function App() {
       <nav className="navbar navbar-expand navbar-dark bg-dark">
 
         {/* 1st link - brand/home */}
-        <a href="/restaurants" className="navbar-brand">Table_Reserver</a>
+        <a href="/restaurants" className="navbar-brand">Restaurant Name</a>
 
         {/* remaining links */}
         <div className="navbar-nav mr-auto">
@@ -39,7 +39,7 @@ function App() {
           {/* 2nd link - link to restaurants */}
           <li className="nav-item">
             {/* link imported from react-router-dom */}
-            <Link to={"/restaurants"} className="nav-link">Restaurants</Link> 
+            <Link to={"/restaurants"} className="nav-link">Reservations</Link> 
           </li>
 
           {/* 3rd link - one link that looks different based on a variable */}
@@ -50,7 +50,6 @@ function App() {
           </li>
 
           <li className="nav-item">
-            {/* if user exists, run logout fxn onClick, if user does not exist, go to /login page when link clicked */}
             { user ? (<a></a>)
                : (<Link to={"/register"} className="nav-link">Register</Link>) }
           </li>
