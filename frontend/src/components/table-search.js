@@ -104,6 +104,10 @@ const TableSearch = props => {
       });
   };
 
+  const continueAsGuest = () => {
+
+  }
+
   return (
     <div>
       <h1>Search For Tables</h1>
@@ -233,23 +237,35 @@ const TableSearch = props => {
           />
         </div>
           <div className="input-group-append">
-          <button
+
+          { props.user ? (<a><button
               className="btn btn-outline-secondary"
               type="button"
               onClick={retrieveTables}
             >
-              Login and Continue
-            </button>
-
-            { user ? (<a></a>)
+              Continue
+            </button></a>)
                : (
-                  <button
-                    className="btn btn-outline-secondary"
-                    type="button"
-                    onClick={retrieveTables}
-                  >
-                    Continue as Guest
-                  </button>
+                <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={retrieveTables}
+              >
+                Login and Continue
+              </button>
+                )}
+
+            { props.user ? (<a></a>)
+               : (
+                <Link to={"/guest"} className="nav-link">
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      onClick={retrieveTables}
+                    >
+                      Continue as Guest
+                    </button>
+                  </Link>
                 )}
           </div>
       </div>

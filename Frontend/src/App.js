@@ -7,11 +7,12 @@ import Restaurant from "./components/restaurants";
 import TableSearch from "./components/table-search";
 import Login from "./components/login";
 import Register from "./components/register";
+import GuestReservation from "./components/reserve-as-guest";
 
 function App() {
   const [user, setUser] = React.useState(null); //create state variable (user), initialize to null, and setUser
 
-  //login function - pass user, sets use to equal parameter
+  //login function - pass user, sets user to equal parameter
   async function login(user) {
     setUser(user);
   }
@@ -62,15 +63,20 @@ function App() {
       {/* Route section/rest of page */}
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/tables"]} component={TableSearch} />
+          <Route exact path={["/", "/tables"]} 
+          render={(props) => ( <TableSearch {...props} user={user}/>)} 
+          />
           <Route path="/restaurants/:id/review"
             render={(props) => ( <AddReview {...props} user={user}/>)} //render allows props to be passed to AddReviews component
           />
           <Route path="/restaurants/:id"
             render={(props) => ( <Restaurant {...props} user={user}/>)}
           />
+          <Route path="/guest"
+          render={(props) => ( <GuestReservation {...props} user={user}/>)}
+          />
           <Route path="/login"
-            render={(props) => ( <Login {...props} login={login} />)}
+            render={(props) => ( <Login {...props} login={login}/>)}
           />
           <Route path="/register"
             render={(props) => ( <Register {...props} register={register}/>)}
