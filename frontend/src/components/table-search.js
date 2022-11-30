@@ -205,39 +205,7 @@ const TableSearch = props => {
         })}
       </div>
       <div className="row pb-1">
-        {/* 1st input box- name */}
-        <div className="input-group col-lg-4"> 
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Name"
-            value={resName}
-            onChange={onChangeName}
-          />
-        </div>
-        {/* 2nd input box - phone */}
-        <div className="input-group col-lg-4">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Phone Number"
-            value={resPhone}
-            onChange={onChangePhone}
-
-          />
-        </div>
-        {/* 3rd input box - email */}
-        <div className="input-group col-lg-4">
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Email"
-            value={resEmail}
-            onChange={onChangeEmail}
-          />
-        </div>
           <div className="input-group-append">
-
           { props.user ? (<a><button
               className="btn btn-outline-secondary"
               type="button"
