@@ -241,8 +241,7 @@ const TableSearch = props => {
               Login and Continue
             </button>
 
-            { user ? (<a></a>)
-               : (
+           <div className ="input-group">
                   <button
                     className="btn btn-outline-secondary"
                     type="button"
@@ -250,7 +249,7 @@ const TableSearch = props => {
                   >
                     Continue as Guest
                   </button>
-                )}
+            </div>   
           </div>
       </div>
     </div>
