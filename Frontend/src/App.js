@@ -36,10 +36,10 @@ function App() {
         {/* remaining links */}
         <div className="navbar-nav mr-auto">
 
-          {/* 2nd link - link to restaurants */}
+          {/* 2nd link - link to make reservation/view tables */}
           <li className="nav-item">
             {/* link imported from react-router-dom */}
-            <Link to={"/restaurants"} className="nav-link">Reservations</Link> 
+            <Link to={"/tables"} className="nav-link">Reservations</Link> 
           </li>
 
           {/* 3rd link - one link that looks different based on a variable */}
@@ -62,7 +62,7 @@ function App() {
       {/* Route section/rest of page */}
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
+          <Route exact path={["/", "/restaurants", "/tables"]} component={RestaurantsList} />
           <Route path="/restaurants/:id/review"
             render={(props) => ( <AddReview {...props} user={user}/>)} //render allows props to be passed to AddReviews component
           />
