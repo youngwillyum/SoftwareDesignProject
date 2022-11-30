@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants";
-import RestaurantsList from "./components/restaurants-list";
+import TableSearch from "./components/table-search";
 import Login from "./components/login";
 import Register from "./components/register";
 
@@ -31,7 +31,7 @@ function App() {
       <nav className="navbar navbar-expand navbar-dark bg-dark">
 
         {/* 1st link - brand/home */}
-        <a href="/restaurants" className="navbar-brand">Restaurant Name</a>
+        <a href="/tables" className="navbar-brand">Restaurant Name</a>
 
         {/* remaining links */}
         <div className="navbar-nav mr-auto">
@@ -62,7 +62,7 @@ function App() {
       {/* Route section/rest of page */}
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/restaurants", "/tables"]} component={RestaurantsList} />
+          <Route exact path={["/", "/tables"]} component={TableSearch} />
           <Route path="/restaurants/:id/review"
             render={(props) => ( <AddReview {...props} user={user}/>)} //render allows props to be passed to AddReviews component
           />

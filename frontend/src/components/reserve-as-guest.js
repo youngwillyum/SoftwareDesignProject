@@ -250,14 +250,14 @@ const RestaurantsList = props => {
               type="button"
               onClick={retrieveTables}
             >
-              Login
+              Login and Continue
             </button>
             <button
               className="btn btn-outline-secondary"
               type="button"
               onClick={retrieveTables}
             >
-              Make Reservation as Guest
+              Continue as Guest
             </button>
           </div>
       </div>
