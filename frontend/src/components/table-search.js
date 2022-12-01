@@ -14,6 +14,10 @@ const TableSearch = props => {
 
   const [resTables, setResTables] = useState([]);
 
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var now = new Date();
+  var day1 = days[ now.getDay() ];  
+
   //tells react that app should do these after render
   useEffect(() => {
     //log in prompt???
@@ -108,12 +112,6 @@ const TableSearch = props => {
   const continueAsGuest = () => {
 
   }
-  
-
-  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var now = new Date();
-  var day1 = days[ now.getDay() ];  
-  var results = '?';
  
   const checkDay=e=>{
     if (day1 == 'Thursday' || day1 == 'Friday'){
@@ -166,6 +164,7 @@ const TableSearch = props => {
               }}>
               Search for Tables
             </button>
+            
           </div>
       </div>
       
@@ -242,22 +241,13 @@ const TableSearch = props => {
                 type="button"
                 onClick={retrieveTables}
               >
-                Login and Continue
+                Continue as Guest
               </button>
                 )}
 
-            { props.user ? (<a></a>)
-               : (
-                <Link to={"/guest"} className="nav-link">
-                    <button
-                      className="btn btn-outline-secondary"
-                      type="button"
-                      onClick={retrieveTables}
-                    >
-                      Continue as Guest
-                    </button>
-                  </Link>
-                )}
+            
+                
+               
           </div>
       </div>
     </div>
