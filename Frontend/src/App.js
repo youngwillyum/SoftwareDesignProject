@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import AddReview from "./components/add-review";
+
 import Restaurant from "./components/restaurants";
 import TableSearch from "./components/table-search";
 import Login from "./components/login";
@@ -66,9 +66,7 @@ function App() {
           <Route exact path={["/", "/tables"]} 
           render={(props) => ( <TableSearch {...props} user={user}/>)} 
           />
-          <Route path="/restaurants/:id/review"
-            render={(props) => ( <AddReview {...props} user={user}/>)} //render allows props to be passed to AddReviews component
-          />
+         
           <Route path="/restaurants/:id"
             render={(props) => ( <Restaurant {...props} user={user}/>)}
           />
