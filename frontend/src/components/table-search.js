@@ -248,16 +248,10 @@ const TableSearch = props => {
                    <div >Would you like to register?</div> 
                   </button>
                  </div>)}
-                 <Link to={"/register"} className="nav-link">Would you like to register?</Link>
-                 <Link to={{
-                    pathname:"/guest",
-                    state: {
-                      numGuests: resNumGuests,
-                      resDT: resDateTime,
-                      tabs: resTables
-                    }
-                  }} className="nav-link">Continue as guest</Link>
+                 <Link to={"/register"} className="btn btn-outline-secondary nav-link">Would you like to register?</Link>
+                 <Link to={"/guest"} className="btn btn-outline-secondary nav-link">Continue as guest</Link>
                  </Popup>
+                
                 )}
           </div>
       </div>
