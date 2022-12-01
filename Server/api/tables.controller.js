@@ -5,15 +5,6 @@ export default class TablesController {
     const tablesPerPage = req.query.tablesPerPage ? parseInt(req.query.tablesPerPage, 10) : 20
     const page = req.query.page ? parseInt(req.query.page, 10) : 0
 
-    // let filters = {}
-    // if (req.query.cuisine) {
-    //   filters.cuisine = req.query.cuisine
-    // } else if (req.query.zipcode) {
-    //   filters.zipcode = req.query.zipcode
-    // } else if (req.query.name) {
-    //   filters.name = req.query.name
-    // }
-
     let filters = {}
     if (req.query.numGuests) {
       filters.numGuests = req.query.numGuests
