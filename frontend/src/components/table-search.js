@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import RestaurantDataService from "../services/restaurant"
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const TableSearch = props => {
   //variables to hold reservation
@@ -140,6 +142,7 @@ const TableSearch = props => {
             value={resNumGuests}
             onChange={onChangeNumGuests}
           />
+          
         </div>
 
         {/* 5th input box - date & time */}
@@ -236,16 +239,21 @@ const TableSearch = props => {
               Continue
             </button></a>)
                : (
-                <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={retrieveTables}
-              >
-                Continue as Guest
-              </button>
+                <Popup trigger={<button onClick={retrieveTables}> Continue as Guest</button>} modal nested position="top center">
+                 {close => (
+                 <div className = "modal">
+                  <button className ="close" onClick={close}>
+                   <div >Would you like to register?</div> 
+                  </button>
+                 </div>)}
+                 <Link to={"/register"} className="nav-link">Would you like to register?</Link>
+                 </Popup>
+                
+                
+                
                 )}
 
-            
+  
                 
                
           </div>
