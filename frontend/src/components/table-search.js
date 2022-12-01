@@ -239,15 +239,17 @@ const TableSearch = props => {
               Continue
             </button></a>)
                : (
-                <Popup trigger={<button onClick={retrieveTables}> Continue as Guest</button>} modal nested position="top center">
+                <Popup trigger={<button
+                  className="btn btn-outline-secondary"
+                  type="button" onClick={retrieveTables}> Continue as Guest</button>} modal nested position="top center">
                  {close => (
                  <div className = "modal">
-                  <button className ="close" onClick={close}>
+                  <button className="btn btn-outline-secondary close" type="button" onClick={close}>
                    <div >Would you like to register?</div> 
                   </button>
                  </div>)}
-                 <Link to={"/register"} className="nav-link">Would you like to register?</Link>
-                 <Link to={"/guest"} className="nav-link">Continue as guest</Link>
+                 <Link to={"/register"} className="btn btn-outline-secondary nav-link">Would you like to register?</Link>
+                 <Link to={"/guest"} className="btn btn-outline-secondary nav-link">Continue as guest</Link>
                  </Popup>
                 
                 
