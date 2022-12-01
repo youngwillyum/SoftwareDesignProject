@@ -15,8 +15,6 @@ const Register = props => {
         PreferredNumber: "",
         Points: "",
         PreferredPayment: "",
-
-    
       };
     
       const [user, setUser] = useState(initialUserState);

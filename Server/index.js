@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import ResturantsDAO from "./dao/restaurantsDAO.js";
 import TablesDAO from "./dao/tablesDAO.js";
 import ReservationsDAO from "./dao/reservationsDAO.js";
-
+import RegistrationDAO from "./dao/registrationDAO.js";
 
 dotenv.config()
 const MongoClient = mongodb.MongoClient
@@ -22,6 +22,7 @@ MongoClient.connect(
     process.exit(1);
 })
 .then(async client => {
+    await RegistrationDAO.injectDB(client);
     await TablesDAO.injectDB(client);
     await ResturantsDAO.injectDB(client);
     await ReservationsDAO.injectDB(client);

@@ -1,21 +1,22 @@
-import ReservationsDAO from "./dao/reservationsDAO.js";
+import ReservationsDAO from "../dao/reservationsDAO.js";
 
-export default class ReviewsController {
+export default class ReservationsController {
     static async apiPostReservation(req, res, next) {
       try {
-        const restaurantId = req.body.restaurant_id
-        const review = req.body.text
-        const userInfo = {
-          name: req.body.name,
-          _id: req.body.user_id
-        }
-        const date = new Date()
+        const name = req.body.name
+        const phone = req.body.phone
+        const email = req.body.email
+        const date = req.body.date
+        const numGuests = req.body.num_guests
+        const tables = req.body.tables
   
-        const ReviewResponse = await ReviewsDAO.addReview(
-          restaurantId,
-          userInfo,
-          review,
-          date,
+        const ReservationResponse = await ReservationsDAO.addReservation(
+            name,
+            phone,
+            email,
+            date,
+            numGuests,
+            tables
         )
         res.json({ status: "success" })
       } catch (e) {

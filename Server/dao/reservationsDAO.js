@@ -18,7 +18,7 @@ export default class ReservationsDAO {
   static async addReservation(name, phone, email, date, numGuests, tables) {
     try {
       const reservationDoc = { 
-            name: user.name,
+            name: name,
             phone_number: phone,
             email: email,
             date: date,

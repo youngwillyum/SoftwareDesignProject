@@ -3,11 +3,11 @@ import http from "../http-common";
 //make all fxns that make API calls and return info from API calls
 class RestaurantDataService {
     getAll(page = 0) {
-        return http.get(`?page=${page}`);
+        return http.get(`/tables?page=${page}`);
     }
 
     getWithNumGuests(num = 0){
-        return http.get(`?numGuests=${num}`);
+        return http.get(`/tables?numGuests=${num}`);
     }
     
     get(id) {
@@ -20,6 +20,10 @@ class RestaurantDataService {
     
     createReview(data) {
         return http.post("/review", data);
+    }
+
+    createReservation(data) {
+        return http.post("/reservations", data);
     }
     
     updateReview(data) {
