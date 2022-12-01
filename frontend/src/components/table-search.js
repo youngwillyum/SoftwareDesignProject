@@ -252,13 +252,7 @@ const TableSearch = props => {
                  <Link to={"/guest"} className="btn btn-outline-secondary nav-link">Continue as guest</Link>
                  </Popup>
                 
-                
-                
                 )}
-
-  
-                
-               
           </div>
       </div>
     </div>
