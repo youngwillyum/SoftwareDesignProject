@@ -8,6 +8,7 @@ const TableSearch = props => {
   const [tables, setTables] = useState([]);
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
+  const [resultz, setResultz] = useState("");
 
   const [resTables, setResTables] = useState([]);
 
@@ -96,10 +97,30 @@ const TableSearch = props => {
   const continueAsGuest = () => {
 
   }
+  
+
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var now = new Date();
+  var day1 = days[ now.getDay() ];  
+  var results = '?';
+ 
+  const checkDay=e=>{
+    if (day1 == 'Thursday' || day1 == 'Friday'){
+      setResultz( 'It is a high traffic day');
+      console.log(resultz);
+    } else {
+      setResultz( 'Its a normal traffic day');
+      console.log(resultz);
+    } 
+  }
+
+  
 
   return (
+    
     <div>
       <h1>Search For Tables</h1>
+      <h2>{resultz}</h2>
       <div className="row pb-1">
         {/* 4th input box - number of customers */}
         <div className="input-group col-lg-4">
@@ -128,8 +149,10 @@ const TableSearch = props => {
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={retrieveTables}
-            >
+              onClick={(e) => {
+                retrieveTables();
+                checkDay(e);
+              }}>
               Search for Tables
             </button>
           </div>
