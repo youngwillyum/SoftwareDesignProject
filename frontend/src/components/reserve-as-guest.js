@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import RestaurantDataService from "../services/restaurant"
 
+
 const RestaurantsList = props => {
+  
   //variables to hold reservation
   const [tables, setTables] = useState([]);
   const [resName, setResName ] = useState("");
@@ -45,6 +47,19 @@ const RestaurantsList = props => {
       <div className="current-reservation">
         <h1>Make Reservation</h1>
       </div>
+
+      <div className="display-group col-lg-4">
+        <h5>Number of guests: {props.location.state.numGuests} </h5>
+      </div>
+
+      <div className="display-group col-lg-4">
+        <h5>Reservation Date and Time: {props.location.state.resDT} </h5>
+      </div>
+
+      <div className="display-group col-lg-4">
+        <h5>Tables reserved: {props.location.state.tabs} </h5>
+      </div>
+      
       <div className="row pb-1">
         {/* 1st input box- name */}
         <div className="input-group col-lg-4"> 

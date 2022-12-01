@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import RestaurantDataService from "../services/restaurant"
 
 const TableSearch = props => {
+  var tableList = "";
   //variables to hold reservation
   const [tables, setTables] = useState([]);
   const [resName, setResName ] = useState("");
@@ -71,6 +72,12 @@ const TableSearch = props => {
 
   const addToRes = e => {
     const tableNumToAdd = e.target.value;
+    // if (tableList.length == 0) {
+    //   tableList += tableNumToAdd
+    // }
+    // else {
+    //   tableList = tableList + ", " + tableNumToAdd 
+    // }
     for (let i = 0; i < tables.length; i++) {
       if (tables[i].table_number == tableNumToAdd){
         setResTables(resTables.concat(tables[i]));
@@ -225,7 +232,14 @@ const TableSearch = props => {
 
             { props.user ? (<a></a>)
                : (
-                <Link to={"/guest"} className="nav-link">
+                <Link to={{
+                  pathname:"/guest",
+                  state: {
+                    numGuests: resNumGuests,
+                    resDT: resDateTime,
+                    tabs: resTables ////////////////////////
+                  }
+                }} className="nav-link">
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
