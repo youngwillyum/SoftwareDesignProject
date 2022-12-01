@@ -6,9 +6,6 @@ const TableSearch = props => {
   var tableList = "";
   //variables to hold reservation
   const [tables, setTables] = useState([]);
-  const [resName, setResName ] = useState("");
-  const [resPhone, setResPhone ] = useState("");
-  const [resEmail, setResEmail ] = useState("");
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
 
@@ -20,21 +17,6 @@ const TableSearch = props => {
     //retrieveRestaurants();
     //retrieveCuisines();
   }, []);
-
-  const onChangeName = e => {
-    const resName = e.target.value;
-    setResName(resName);
-  };
-
-  const onChangePhone = e => {
-    const resPhone = e.target.value;
-    setResPhone(resPhone);
-  };
-
-  const onChangeEmail = e => {
-    const resEmail = e.target.value;
-    setResEmail(resEmail);
-  };
 
   const onChangeDateTime = e => {
     const resDateTime = e.target.value;
