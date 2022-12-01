@@ -16,6 +16,11 @@ const RestaurantsList = props => {
   const [resTables, setResTables] = useState([]);
 
   const [submitted, setSubmitted] = useState(false);
+  const [traf, setTraf] = useState(false);
+
+  const [cardName, setCardName] = useState("");
+  const [cardNumber, setCardNumber ] = useState("");
+  const [cardDate, setCardDate] = useState([]);
 
   // setResNumGuests(props.location.state.numGuests);
 
@@ -23,15 +28,17 @@ const RestaurantsList = props => {
     setResNumGuests(props.location.state.numGuests);
     setResDateTime(props.location.state.resDT);
     setResTables(props.location.state.tabs);
+    setTraf(props.location.state.traf);
   };
   
   const saveReservation = () => {
+    
     var data = {
       name : resName,
 	    phone : resPhone,
 	    email : resEmail,
 	    date : resDateTime,
-	    num_guests : props.location.state.numGuests,
+	    num_guests : resNumGuests,
 	    tables : resTables
     };
     
@@ -63,6 +70,21 @@ const RestaurantsList = props => {
   const onChangeEmail = e => {
     const resEmail = e.target.value;
     setResEmail(resEmail);
+  };
+
+  const onChangeCardName = e => {
+    const cardName = e.target.value;
+    setCardName(cardName);
+  };
+
+  const onChangeCardNum = e => {
+    const cardNumber = e.target.value;
+    setCardNumber(cardNumber);
+  };
+
+  const onChangeCardDate = e => {
+    const cardDate = e.target.value;
+    setCardDate(cardDate);
   };
 
   return (
@@ -142,6 +164,46 @@ const RestaurantsList = props => {
                   onChange={onChangeEmail}
                 />
               </div>
+              <div>{traf ? (
+                <div>
+                  <div className="display-group col-lg-4">
+                    <h5>Credit card info for high-traffic no show fee:</h5>
+                  </div>
+
+                  <div className="input-group col-lg-4">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Name on card"
+                      value={cardName}
+                      onChange={onChangeCardName}
+                    />
+                  </div>
+                  <div className="input-group col-lg-4">
+                    <input
+                      type="number"
+                      className="form-control"
+                      placeholder="Card number"
+                      value={cardNumber}
+                      onChange={onChangeCardNum}
+                    />
+                  </div>
+                  <div className="input-group col-lg-4">
+                    <input
+                      type="month"
+                      className="form-control"
+                      placeholder="Expiration date"
+                      value={cardDate}
+                      onChange={onChangeCardDate}
+                    />
+                  </div>
+                </div>
+                ):(
+                  <p></p>
+                )}
+                </div>
+              
+
                 <div className="input-group-append">
                   <button
                     className="btn btn-outline-secondary"

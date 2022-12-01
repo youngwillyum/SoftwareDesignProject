@@ -13,6 +13,7 @@ const TableSearch = props => {
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
   const [resultz, setResultz] = useState("");
+  const [traf, setTraf] = useState(false);
 
   const [resTables, setResTables] = useState([]);
 
@@ -95,43 +96,26 @@ const TableSearch = props => {
       }
     }
   };
-
-  const refreshList = () => {
-    retrieveTables();
-  };
-
-  const find = (query, by) => {
-    RestaurantDataService.find(query, by)
-      .then(response => {
-        console.log(response.data);
-        setTables(response.data.tables);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const continueAsGuest = () => {
-
-  }
  
   const checkDay=e=>{
     if (day1 == 'Thursday' || day1 == 'Friday'){
       setResultz( 'It is a high traffic day');
       console.log(resultz);
+      setTraf(true);
     } else {
       setResultz( 'Its a normal traffic day');
       console.log(resultz);
+      setTraf(false);
     } 
   }
 
-  
-
   return (
-    
     <div>
       <h1>Search For Tables</h1>
       <h2>{resultz}</h2>
+      
+      { traf ? (<p>A $10 fee will be charged for a no show and a credit card is required on file.</p>) : (<p></p>)} 
+      
       <div className="row pb-1">
         {/* 4th input box - number of customers */}
         <div className="input-group col-lg-4">
@@ -254,7 +238,8 @@ const TableSearch = props => {
                     state: {
                       numGuests: resNumGuests,
                       resDT: resDateTime,
-                      tabs: resTables
+                      tabs: resTables,
+                      traf: traf
                     }
                   }} className="nav-link">Continue as guest</Link>
                  </Popup>
