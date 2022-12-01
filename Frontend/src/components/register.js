@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
+import validator from 'validator'
 
 const Register = props => {
     
     const initialUserState = {
         name: "",
-        id: "",
+        password: "",
         phone: "",
         email: "",
         mailingaddress: "",
@@ -19,6 +20,30 @@ const Register = props => {
       };
     
       const [user, setUser] = useState(initialUserState);
+      const [emailError, setEmailError] = useState('');
+      const [passwordError, setPasswordError] = useState('');
+      const validateEmail = (e) => {
+        var email = e.target.value
+
+        if (validator.isEmail(email)) {
+        setEmailError('Valid Email :)')
+        } else {
+        setEmailError('Enter valid Email!')
+      }
+      
+      }
+
+      const validatePassword = (e) => {
+        var password = e.target.value
+
+        if (validator.isStrongPassword(password)) {
+        setPasswordError('Strong Password :)')
+        } else {
+        setPasswordError('Improve Password')
+      }
+      
+      }
+
     
       const handleInputChange = event => {
         const { name, value } = event.target;
@@ -38,10 +63,12 @@ const Register = props => {
             <div className="form-group">
               <label htmlFor="user">Username</label>
               <input
-                type="text"
+                type="username"
                 className="form-control"
                 id="name"
                 required
+                maxLength={12}
+                minLength={4}
                 value={user.name}
                 onChange={handleInputChange}
                 name="name"
@@ -49,42 +76,50 @@ const Register = props => {
             </div>
     
             <div className="form-group">
-              <label htmlFor="id">ID</label>
+              <label htmlFor="password">Password</label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
-                id="id"
+                id="password"
                 required
-                value={user.id}
-                onChange={handleInputChange}
-                name="id"
-              />
+                value={user.password}
+                onChange={(e) => {
+                  validatePassword(e)
+                  handleInputChange(e)
+                  }}
+                name="password"
+              /> <span style={{
+                fontWeight: 'bold',
+                color: 'red',
+                }}>{passwordError}</span>
             </div>
     
-            <div className="form-group">
+            <div className="form-group" >
               <label htmlFor="phone">Phone</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 id="phone"
                 required
+                maxLength={12}
+                minLength={10}
                 value={user.phone}
                 onChange={handleInputChange}
                 name="phone"
               />
             </div>
-    
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                className="form-control"
-                id="email"
-                required
-                value={user.email}
-                onChange={handleInputChange}
-                name="email"
-              />
+          
+            <div className="form-group" >
+                <label htmlFor="email">Email: </label><input className="form-control" type="text" id="email"
+                onChange={(e) => {
+                  validateEmail(e)
+                  handleInputChange(e)
+                  }}></input> 
+                <span style={{
+                fontWeight: 'bold',
+                color: 'red',
+                }}>{emailError}</span>
+             
             </div>
 
             <div className="form-group">
@@ -127,8 +162,45 @@ const Register = props => {
                 ))}
             </Form>
 
-    
+
+            <div className="form-group">
+              <label htmlFor="PreferredNumber">Preferred Number</label>
+              <input
+                type="number"
+                className="form-control"
+                id="PreferredNumber"
+                required
+                value={user.PreferredNumber}
+                onChange={handleInputChange}
+                name="PreferredNumber"
+              />
+            </div>
            
+            <div className="form-group">
+              <label htmlFor="Points">Points</label>
+              <input
+                type="number"
+                className="form-control"
+                id="Points"
+                disabled
+                value={user.Points}
+                onChange={handleInputChange}
+                name="Points"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="PreferredPayment">Preferred Payment Method</label>
+              <input
+                type="text"
+                className="form-control"
+                id="PreferredPayment"
+                required
+                value={user.PreferredPayment}
+                onChange={handleInputChange}
+                name="PreferredPayment"
+              />
+            </div>
     
             <button onClick={login} className="btn btn-success">
               Register
