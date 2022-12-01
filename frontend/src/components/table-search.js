@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import RestaurantDataService from "../services/restaurant"
 
 const TableSearch = props => {
+  var tableList = "";
   //variables to hold reservation
   const [tables, setTables] = useState([]);
-  const [resName, setResName ] = useState("");
-  const [resPhone, setResPhone ] = useState("");
-  const [resEmail, setResEmail ] = useState("");
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
   const [resultz, setResultz] = useState("");
@@ -24,21 +22,6 @@ const TableSearch = props => {
     //retrieveRestaurants();
     //retrieveCuisines();
   }, []);
-
-  const onChangeName = e => {
-    const resName = e.target.value;
-    setResName(resName);
-  };
-
-  const onChangePhone = e => {
-    const resPhone = e.target.value;
-    setResPhone(resPhone);
-  };
-
-  const onChangeEmail = e => {
-    const resEmail = e.target.value;
-    setResEmail(resEmail);
-  };
 
   const onChangeDateTime = e => {
     const resDateTime = e.target.value;
@@ -76,6 +59,12 @@ const TableSearch = props => {
 
   const addToRes = e => {
     const tableNumToAdd = e.target.value;
+    // if (tableList.length == 0) {
+    //   tableList += tableNumToAdd
+    // }
+    // else {
+    //   tableList = tableList + ", " + tableNumToAdd 
+    // }
     for (let i = 0; i < tables.length; i++) {
       if (tables[i].table_number == tableNumToAdd){
         setResTables(resTables.concat(tables[i]));
@@ -245,9 +234,25 @@ const TableSearch = props => {
               </button>
                 )}
 
-            
-                
-               
+            { props.user ? (<a></a>)
+               : (
+                <Link to={{
+                  pathname:"/guest",
+                  state: {
+                    numGuests: resNumGuests,
+                    resDT: resDateTime,
+                    tabs: resTables ////////////////////////
+                  }
+                }} className="nav-link">
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      onClick={retrieveTables}
+                    >
+                      Continue as Guest
+                    </button>
+                  </Link>
+                )}
           </div>
       </div>
     </div>
