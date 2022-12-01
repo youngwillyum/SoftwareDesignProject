@@ -18,9 +18,6 @@ const TableSearch = props => {
 
   //tells react that app should do these after render
   useEffect(() => {
-    //log in prompt???
-    //retrieveRestaurants();
-    //retrieveCuisines();
   }, []);
 
   const onChangeDateTime = e => {
@@ -59,12 +56,6 @@ const TableSearch = props => {
 
   const addToRes = e => {
     const tableNumToAdd = e.target.value;
-    // if (tableList.length == 0) {
-    //   tableList += tableNumToAdd
-    // }
-    // else {
-    //   tableList = tableList + ", " + tableNumToAdd 
-    // }
     for (let i = 0; i < tables.length; i++) {
       if (tables[i].table_number == tableNumToAdd){
         setResTables(resTables.concat(tables[i]));
@@ -82,25 +73,6 @@ const TableSearch = props => {
       }
     }
   };
-
-  const refreshList = () => {
-    retrieveTables();
-  };
-
-  const find = (query, by) => {
-    RestaurantDataService.find(query, by)
-      .then(response => {
-        console.log(response.data);
-        setTables(response.data.tables);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const continueAsGuest = () => {
-
-  }
  
   const checkDay=e=>{
     if (day1 == 'Thursday' || day1 == 'Friday'){
@@ -241,7 +213,7 @@ const TableSearch = props => {
                   state: {
                     numGuests: resNumGuests,
                     resDT: resDateTime,
-                    tabs: resTables ////////////////////////
+                    tabs: resTables 
                   }
                 }} className="nav-link">
                     <button
