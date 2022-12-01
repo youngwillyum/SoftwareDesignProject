@@ -10,6 +10,7 @@ const TableSearch = props => {
   const [resEmail, setResEmail ] = useState("");
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
+  const [resultz, setResultz] = useState("");
 
   const [resTables, setResTables] = useState([]);
 
@@ -107,19 +108,20 @@ const TableSearch = props => {
   const continueAsGuest = () => {
 
   }
-  const day = `${new Date().toLocaleString() + ''}`;
-
+  
 
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var now = new Date();
   var day1 = days[ now.getDay() ];  
-  var results = '';
+  var results = '?';
  
-  function checkDay(){
-    if (day1 === 'Wednesday'){
-      results = 'It is a high traffic day';
+  const checkDay=e=>{
+    if (day1 == 'Thursday' || day1 == 'Friday'){
+      setResultz( 'It is a high traffic day');
+      console.log(resultz);
     } else {
-      results = '!';
+      setResultz( 'Its a normal traffic day');
+      console.log(resultz);
     } 
   }
 
@@ -128,7 +130,8 @@ const TableSearch = props => {
   return (
     
     <div>
-      <h1>Search For Tables {results}</h1>
+      <h1>Search For Tables</h1>
+      <h2>{resultz}</h2>
       <div className="row pb-1">
         {/* 4th input box - number of customers */}
         <div className="input-group col-lg-4">
@@ -157,9 +160,9 @@ const TableSearch = props => {
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onChange={() => {
+              onClick={(e) => {
                 retrieveTables();
-                checkDay();
+                checkDay(e);
               }}>
               Search for Tables
             </button>
