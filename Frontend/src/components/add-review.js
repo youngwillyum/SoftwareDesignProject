@@ -47,7 +47,6 @@ const AddReview = props => {
           console.log(e);
         });
     }
-
   };
 
   return (
