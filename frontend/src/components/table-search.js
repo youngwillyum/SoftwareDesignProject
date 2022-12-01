@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import RestaurantDataService from "../services/restaurant"
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const TableSearch = props => {
-  var tableList = "";
   //variables to hold reservation
   const [tables, setTables] = useState([]);
+  const [resName, setResName ] = useState("");
+  const [resPhone, setResPhone ] = useState("");
+  const [resEmail, setResEmail ] = useState("");
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
   const [resultz, setResultz] = useState("");
@@ -18,7 +22,25 @@ const TableSearch = props => {
 
   //tells react that app should do these after render
   useEffect(() => {
+    //log in prompt???
+    //retrieveRestaurants();
+    //retrieveCuisines();
   }, []);
+
+  const onChangeName = e => {
+    const resName = e.target.value;
+    setResName(resName);
+  };
+
+  const onChangePhone = e => {
+    const resPhone = e.target.value;
+    setResPhone(resPhone);
+  };
+
+  const onChangeEmail = e => {
+    const resEmail = e.target.value;
+    setResEmail(resEmail);
+  };
 
   const onChangeDateTime = e => {
     const resDateTime = e.target.value;
@@ -73,6 +95,25 @@ const TableSearch = props => {
       }
     }
   };
+
+  const refreshList = () => {
+    retrieveTables();
+  };
+
+  const find = (query, by) => {
+    RestaurantDataService.find(query, by)
+      .then(response => {
+        console.log(response.data);
+        setTables(response.data.tables);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  const continueAsGuest = () => {
+
+  }
  
   const checkDay=e=>{
     if (day1 == 'Thursday' || day1 == 'Friday'){
@@ -101,6 +142,7 @@ const TableSearch = props => {
             value={resNumGuests}
             onChange={onChangeNumGuests}
           />
+          
         </div>
 
         {/* 5th input box - date & time */}
@@ -197,34 +239,23 @@ const TableSearch = props => {
               Continue
             </button></a>)
                : (
-                <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={retrieveTables}
-              >
-                Continue as Guest
-              </button>
+                <Popup trigger={<button onClick={retrieveTables}> Continue as Guest</button>} modal nested position="top center">
+                 {close => (
+                 <div className = "modal">
+                  <button className ="close" onClick={close}>
+                   <div >Would you like to register?</div> 
+                  </button>
+                 </div>)}
+                 <Link to={"/register"} className="nav-link">Would you like to register?</Link>
+                 </Popup>
+                
+                
+                
                 )}
 
-            { props.user ? (<a></a>)
-               : (
-                <Link to={{
-                  pathname:"/guest",
-                  state: {
-                    numGuests: resNumGuests,
-                    resDT: resDateTime,
-                    tabs: resTables 
-                  }
-                }} className="nav-link">
-                    <button
-                      className="btn btn-outline-secondary"
-                      type="button"
-                      onClick={retrieveTables}
-                    >
-                      Continue as Guest
-                    </button>
-                  </Link>
-                )}
+  
+                
+               
           </div>
       </div>
     </div>
