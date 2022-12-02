@@ -18,7 +18,7 @@ const TableSearch = props => {
   const [resTables, setResTables] = useState([]);
 
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var now = new Date();
+  var now = new Date(resDateTime);
   var day1 = days[ now.getDay() ];  
 
   //tells react that app should do these after render
