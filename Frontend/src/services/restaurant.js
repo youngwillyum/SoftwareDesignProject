@@ -25,6 +25,10 @@ class RestaurantDataService {
     createReservation(data) {
         return http.post("/reservations", data);
     }
+
+    createUser(data) {
+        return http.post("/register", data);
+    }
     
     updateReview(data) {
         return http.put("/review", data);
@@ -37,6 +41,7 @@ class RestaurantDataService {
     getCuisines(id) {
         return http.get(`/cuisines`);
     }
+
 }
     
 export default new RestaurantDataService();

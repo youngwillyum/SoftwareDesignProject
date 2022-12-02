@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
-import validator from 'validator'
+import { Link } from "react-router-dom";
+import validator from 'validator';
+import RestaurantDataService from "../services/restaurant"
 
 const Register = props => {
     
@@ -21,6 +23,9 @@ const Register = props => {
       const [emailError, setEmailError] = useState('');
       const [passwordError, setPasswordError] = useState('');
       const [phonenumberError, setPhonenumberError] = useState('');
+      const [submitted, setSubmitted] = useState(false);
+      const [oldAddr, setOldAddr] = useState(false);
+
       const validateEmail = (e) => {
         var email = e.target.value
 
@@ -53,6 +58,15 @@ const Register = props => {
         }
       }
 
+      const sameAddress = e => {
+        if (e.target.checked) {
+          setOldAddr(user.billingaddress);
+          setUser({ ...user, billingaddress: user.mailingaddress})
+        }
+        else {
+          setUser({ ...user, billingaddress: oldAddr})
+        }
+      };
     
       const handleInputChange = event => {
         const { name, value } = event.target;
@@ -60,15 +74,48 @@ const Register = props => {
       };
     
       const login = () => {
-        props.login(user)
-        props.history.push('/'); //update url - go to homepage
-      }
+        // props.login(user)
+        registerUser();
+        //props.history.push('/'); //update url - go to homepage
+      };
+    
+      const registerUser = () => {
+        var data = {
+          user: user.name,
+          password: user.password,
+          phone: user.phone,
+          email: user.email,
+          mailing_addr: user.mailingaddress,
+          billing_addr: user.billingaddress,
+          preferred_number: user.PreferredNumber,
+          preferred_payment: user.PreferredPayment,
+        };
+
+        RestaurantDataService.createUser(data)
+          .then(response => {
+          setSubmitted(true);
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      };
     
     
     
     return (
         <div className="submit-form">
+          {submitted ? (
           <div>
+            <h4>You have registered successfully!</h4>
+            <Link to={"/tables"} className="btn btn-success">
+              Return to Home
+            </Link>
+          </div>
+        ) : (
+          <div>
+          <div>
+            <p>{user.email}</p>
             <div className="form-group">
               <label htmlFor="user">Username</label>
               <input
@@ -116,11 +163,19 @@ const Register = props => {
             </div>
           
             <div className="form-group" >
-                <label htmlFor="email">Email: </label><input className="form-control" type="text" id="email"
-                onChange={(e) => {
-                  validateEmail(e)
-                  handleInputChange(e)
-                  }}></input> 
+                <label htmlFor="email">Email: </label>
+                <input 
+                  type="text"
+                  className="form-control" 
+                  id="email"
+                  required
+                  value={user.email}
+                  onChange={(e) => {
+                    validateEmail(e)
+                    handleInputChange(e)
+                    }}
+                  name="email">
+                </input> 
                 <span style={{
                 fontWeight: 'bold',
                 color: 'red',
@@ -157,16 +212,19 @@ const Register = props => {
 
 
             <Form>
-                {['radio'].map((type) => (
+                {['checkbox'].map((type) => (
                     <div key={`default-${type}`} className="form-group">
                         <Form.Check 
                         type={type}
                         id={`default-${type}`}
+                        onChange={sameAddress}
                         label={`same as Mailing Address`}
                         />
                     </div>
                 ))}
             </Form>
+
+
 
 
             <div className="form-group">
@@ -212,6 +270,8 @@ const Register = props => {
               Register
             </button>
           </div>
+          </div>
+        )}
         </div>
       );
 }

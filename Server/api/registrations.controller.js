@@ -9,13 +9,19 @@ export default class RegistrationsController {
         const email = req.body.email
         const mailingAddr = req.body.mailing_addr
         const billingAddr = req.body.billing_addr
+        const password = req.body.password
+        const preferredNum = req.body.preferred_number
+        const preferredPayment = req.body.preferred_payment
   
         const RegistrationResponse = await RegistrationDAO.addRegistration(
             user,
             phone,
             email,
             mailingAddr,
-            billingAddr
+            billingAddr,
+            password,
+            preferredNum,
+            preferredPayment
         )
         res.json({ status: "success" })
       } catch (e) {
