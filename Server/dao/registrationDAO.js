@@ -15,14 +15,17 @@ export default class RegistrationsDAO {
     }
   }
 
-  static async addRegistration(user, phone, email, mailingAddr, billingAddr) {
+  static async addRegistration(user, phone, email, mailingAddr, billingAddr, password, preferred_number, preferred_payment) {
     try {
       const registrationDoc = { 
             user: user,
             phone_number: phone,
             email: email,
             mailing_addr: mailingAddr,
-            billing_addr: billingAddr
+            billing_addr: billingAddr,
+            password: password, 
+            preferred_number: preferred_number, 
+            preferred_payment: preferred_payment
         }
       return await registrations.insertOne(registrationDoc)
 
