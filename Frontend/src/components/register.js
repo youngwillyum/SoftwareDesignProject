@@ -20,6 +20,7 @@ const Register = props => {
       const [user, setUser] = useState(initialUserState);
       const [emailError, setEmailError] = useState('');
       const [passwordError, setPasswordError] = useState('');
+      const [phonenumberError, setPhonenumberError] = useState('');
       const validateEmail = (e) => {
         var email = e.target.value
 
@@ -37,9 +38,19 @@ const Register = props => {
         if (validator.isStrongPassword(password)) {
         setPasswordError('Strong Password :)')
         } else {
-        setPasswordError('Improve Password')
+        setPasswordError('Password must be at least 8 characters containing at least 1 Uppercase, 1 symbol, and 1 number.')
       }
       
+      }
+
+      const validatePhoneNumber = (e) => {
+        var phonenumber = e.target.value
+
+        if (validator.isMobilePhone(phonenumber)) {
+          setPhonenumberError('')
+        } else {
+          setPhonenumberError('Please enter a valid phone number')
+        }
       }
 
     
@@ -93,18 +104,15 @@ const Register = props => {
             </div>
     
             <div className="form-group" >
-              <label htmlFor="phone">Phone</label>
-              <input
-                type="number"
-                className="form-control"
-                id="phone"
-                required
-                maxLength={12}
-                minLength={10}
-                value={user.phone}
-                onChange={handleInputChange}
-                name="phone"
-              />
+              <label htmlFor="phone">Phone</label><input type="number" className="form-control" id="phone"
+                onChange={(e) => {
+                  validatePhoneNumber(e)
+                  handleInputChange(e)
+                }}></input>
+                <span style={{
+                  fontWeight: 'bold',
+                  color: 'red',
+                }}>{phonenumberError}</span>
             </div>
           
             <div className="form-group" >
