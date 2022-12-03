@@ -1,9 +1,6 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
-import Restaurant from "./components/restaurants";
 import TableSearch from "./components/table-search";
 import Login from "./components/login";
 import Register from "./components/register";
@@ -65,10 +62,6 @@ function App() {
         <Switch>
           <Route exact path={["/", "/tables"]} 
           render={(props) => ( <TableSearch {...props} user={user}/>)} 
-          />
-         
-          <Route path="/restaurants/:id"
-            render={(props) => ( <Restaurant {...props} user={user}/>)}
           />
           <Route path="/guest"
           render={(props) => ( <GuestReservation {...props} user={user}/>)}
