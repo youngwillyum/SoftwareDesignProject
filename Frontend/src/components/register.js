@@ -52,11 +52,13 @@ const Register = props => {
         var phonenumber = e.target.value
 
         if (validator.isMobilePhone(phonenumber)) {
-          setPhonenumberError('')
+          setPhonenumberError('Valid Phone Number')
         } else {
           setPhonenumberError('Please enter a valid phone number')
         }
       }
+
+     
 
       const sameAddress = e => {
         if (e.target.checked) {
