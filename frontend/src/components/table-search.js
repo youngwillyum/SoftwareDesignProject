@@ -7,9 +7,6 @@ import 'reactjs-popup/dist/index.css';
 const TableSearch = props => {
   //variables to hold reservation
   const [tables, setTables] = useState([]);
-  const [resName, setResName ] = useState("");
-  const [resPhone, setResPhone ] = useState("");
-  const [resEmail, setResEmail ] = useState("");
   const [resDateTime, setResDateTime ] = useState("");
   const [resNumGuests, setResNumGuests ] = useState("");
   const [resultz, setResultz] = useState("");
@@ -20,28 +17,6 @@ const TableSearch = props => {
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var now = new Date(resDateTime);
   var day1 = days[ now.getDay() ];  
-
-  //tells react that app should do these after render
-  useEffect(() => {
-    //log in prompt???
-    //retrieveRestaurants();
-    //retrieveCuisines();
-  }, []);
-
-  const onChangeName = e => {
-    const resName = e.target.value;
-    setResName(resName);
-  };
-
-  const onChangePhone = e => {
-    const resPhone = e.target.value;
-    setResPhone(resPhone);
-  };
-
-  const onChangeEmail = e => {
-    const resEmail = e.target.value;
-    setResEmail(resEmail);
-  };
 
   const onChangeDateTime = e => {
     const resDateTime = e.target.value;

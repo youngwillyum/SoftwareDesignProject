@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import validator from 'validator';
 import RestaurantDataService from "../services/restaurant"
 
 
@@ -21,6 +22,10 @@ const RestaurantsList = props => {
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber ] = useState("");
   const [cardDate, setCardDate] = useState([]);
+
+  const [emailError, setEmailError] = useState('');
+  const [phonenumberError, setPhonenumberError] = useState('');
+  const [creditcardError, setCreditcardError] = useState('');
 
   // setResNumGuests(props.location.state.numGuests);
 
@@ -56,7 +61,7 @@ const RestaurantsList = props => {
   useEffect(() => {
     setVariables();
   }, []);
-
+  
   const onChangeName = e => {
     const resName = e.target.value;
     setResName(resName);
@@ -86,6 +91,36 @@ const RestaurantsList = props => {
     const cardDate = e.target.value;
     setCardDate(cardDate);
   };
+
+  const validateEmail = (e) => {
+    var email = e.target.value
+
+    if (validator.isEmail(email)) {
+      setEmailError('')
+    } else {
+      setEmailError('Enter valid Email!')
+    }
+  }
+
+  const validatePhoneNumber = (e) => {
+    var phonenumber = e.target.value
+
+    if (validator.isMobilePhone(phonenumber)) {
+      setPhonenumberError('')
+    } else {
+      setPhonenumberError('Please enter a valid phone number')
+    }
+  }
+
+  const validateCreditCard = (e) => {
+    var creditcardnum = e.target.value
+
+    if (validator.isCreditCard(creditcardnum)) {
+      setCreditcardError('')
+    } else {
+      setCreditcardError('Please enter a valid credit card number')
+    }
+  }
 
   return (
     <div>
@@ -135,34 +170,42 @@ const RestaurantsList = props => {
       
             <div className="row pb-1">
               {/* 1st input box- name */}
-              <div className="input-group col-lg-4"> 
+              <div className="form-group"> 
+                <label htlmFor="name">Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Name"
                   value={resName}
                   onChange={onChangeName}
                 />
               </div>
               {/* 2nd input box - phone */}
-              <div className="input-group col-lg-4">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Phone Number"
+              <div className="form-group">
+                <label htmlFor="phone">Phone</label>
+                <input type="text" className="form-control" id="Phone Number"
                   value={resPhone}
-                  onChange={onChangePhone}
-                />
+                  onChange={(e) => {
+                    validatePhoneNumber(e)
+                    onChangePhone(e)
+                  }}></input>
+                  <span style={{
+                    fontWeight: 'bold',
+                    color: 'red',
+                  }}>{phonenumberError}</span>
               </div>
               {/* 3rd input box - email */}
-              <div className="input-group col-lg-4">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Email"
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input type="email" className="form-control"
                   value={resEmail}
-                  onChange={onChangeEmail}
-                />
+                  onChange={(e) => {
+                    validateEmail(e)
+                    onChangeEmail(e)
+                  }}></input>
+                  <span style={{
+                    fontWeight: 'bold',
+                    color: 'red',
+                  }}>{emailError}</span>
               </div>
               <div>{traf ? (
                 <div>
@@ -170,25 +213,30 @@ const RestaurantsList = props => {
                     <h5>Credit card info for high-traffic no show fee:</h5>
                   </div>
 
-                  <div className="input-group col-lg-4">
+                  <div className="form-group">
+                  <label htmlFor="name on card">Name on Card</label>
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Name on card"
                       value={cardName}
                       onChange={onChangeCardName}
                     />
                   </div>
-                  <div className="input-group col-lg-4">
-                    <input
-                      type="number"
-                      className="form-control"
-                      placeholder="Card number"
+                  <div className="form-group">
+                  <label htmlFor="cardnumber">Card Number</label>
+                    <input type="number" className="form-control"
                       value={cardNumber}
-                      onChange={onChangeCardNum}
-                    />
+                      onChange={(e) => {
+                        validateCreditCard(e)
+                        onChangeCardNum(e)
+                      }}></input>
+                      <span style={{
+                        fontWeight: 'bold',
+                        color: 'red',
+                      }}>{creditcardError}</span>
                   </div>
-                  <div className="input-group col-lg-4">
+                  <div className="form-group">
+                  <label htmlFor="cardexpiration">Expiration Date</label>
                     <input
                       type="month"
                       className="form-control"

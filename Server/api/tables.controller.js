@@ -7,7 +7,7 @@ export default class TablesController {
 
     let filters = {}
     if (req.query.numGuests) {
-      filters.numGuests = req.query.numGuests
+      filters.numGuests = parseFloat(req.query.numGuests)
     }
     if (req.query.dateTime) {
       filters.dateTime = req.query.dateTime
