@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: "https://mern-restaurant-backend-g82x.onrender.com/api/v1",
   headers: {
     "Content-type": "application/json"
   }
