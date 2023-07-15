@@ -4,7 +4,7 @@ import validator from 'validator';
 import RestaurantDataService from "../services/restaurant"
 
 
-const RestaurantsList = props => {
+const GuestReservation = props => {
   
   //variables to hold reservation
   const [resName, setResName ] = useState("");
@@ -269,4 +269,4 @@ const RestaurantsList = props => {
   );
 };
 
-export default RestaurantsList;
+export default GuestReservation;
