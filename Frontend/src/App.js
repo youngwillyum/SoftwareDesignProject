@@ -3,8 +3,8 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/login";
 import Register from "./components/register";
-import GuestReservation from "./components/reserve-as-guest";
-import TableSearch from "./components/table-search";
+import GuestReservation from "./components/reserve-as-guest.js";
+import TableSearch from "./components/table-search.js";
 
 function App() {
   const [user, setUser] = React.useState(null); //create state variable (user), initialize to null, and setUser
